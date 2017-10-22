@@ -367,7 +367,7 @@ li a:hover:not(.active) {
 }
 
 .title {
-    font-weight: 100;
+    font-weight: 300;
     font-size: 1.2rem;
     text-align: center;
     padding-bottom: 25px;

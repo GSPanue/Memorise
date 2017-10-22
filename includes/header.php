@@ -35,12 +35,10 @@ for ($i = 0; $i < sizeof($currentPathArray); $i++) {
 $pageTitles = array('index' => 'Home', 'rankings' => 'Rankings',
     'login' => 'Log In', 'register' => 'Create An Account', 'logout' => 'Logout');
 
-
 /**
  * $title: Assigned a page title.
  */
 $title = $pageTitles[substr($currentPathArray[$fileNameIndex], 0, $extensionPosition)];
-
 
 /**
  * Outputs the header.
@@ -59,8 +57,6 @@ echo '<head>';
 ?>
 <script>
     $(document).ready(function() {
-        var currentPage = $(location).attr('href'); // Assigns current page URL
-
         /**
          * An AJAX POST request is used to pass 'loggedIn' to ajax/request.php if
          * there is no user logged in. This resets the navigation bar when a user
@@ -74,40 +70,6 @@ echo '<head>';
                 method: 'POST',
                 data: {loggedIn: status}
             });
-        }
-
-
-        if (currentPage.includes("index.php")) {
-            /**
-             * If the current page is index.php and a user is logged in. The users
-             * highscore is assigned to the player object. The highscore, status and rank HTML content
-             * is then updated. Otherwise, the default text is set.
-             */
-            if (getItem(2, 'loggedIn') !== null) {
-                player.setHighScore(JSON.parse(getItem(1, getLoggedIn()))['highscore']);
-                $("#highscore").text(player.getHighScore());
-                $("#status").text("Hello, " + JSON.parse(getItem(1, getLoggedIn()))['username'] + "." + " Your game progress will be saved.");
-                $("#rank").text(JSON.parse(getItem(1, getLoggedIn()))['rank']);
-            }
-            else {
-                /**
-                 * Default text for a user that is not logged in.
-                 */
-                $("#status").text("You are not logged in. Log-in to compete against other players.");
-                $("#highscore").text("0");
-                $("#rank").text("n/a");
-            }
-        }
-        /**
-         * If the current page is register.php, the username, password, email and phone
-         * tooltip text is updated.
-         */
-        else if (currentPage.includes("register.php")) {
-            var spanID = ['username', 'password', 'email', 'phone'];
-
-            for (var i = 0; i < spanID.length; i++) {
-                getElementID(spanID[i] + "-tooltip").setAttribute('aria-label', getAriaLabel(spanID[i]));
-            }
         }
     });
 </script>

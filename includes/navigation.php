@@ -7,12 +7,10 @@
 session_start();
 $loggedIn = ($_SESSION['loginData'] == "true") ? true : false;
 
-
 /**
  * $currentPathArray: Obtains the current file path and splits it into an array of strings.
  */
 $currentPathArray = explode('/', $_SERVER['PHP_SELF']);
-
 
 /**
  * $fileNameIndex: $currentPathArray index that contains '.php'.
@@ -36,7 +34,6 @@ for ($i = 0; $i < sizeof($currentPathArray); $i++) {
     }
 }
 
-
 /**
  * $pageNames: An array of page names.
  */
@@ -54,7 +51,6 @@ $pageTitles = array('index' => 'Home', 'rankings' => 'Rankings',
  * $currentPageName: Assigned the current page's name, e.g. 'index'.
  */
 $currentPageName = substr($currentPathArray[$fileNameIndex], 0, $extensionPosition);
-
 
 /**
  * $primaryNavigationPage: Assigned a boolean value.
@@ -87,7 +83,6 @@ for ($i = 0; $i < sizeOf($pageNames); $i++) {
         }
     }
 }
-
 
 /**
  * primaryNavigationButtons: Outputs the primary navigation buttons and applies the 'active' CSS class

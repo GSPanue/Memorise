@@ -62,9 +62,9 @@ function validate(id, response) {
          * (3) End with: any characters in the negated set (-_"@'£$%^&*()§±)
          */
 
-        var isValidString = /^(?!-)(?!_)(?!.*--)(?!.*__)[A-Za-z0-9-_]{3,15}[^-_"@'£$%^&*()§±]$/.test(getElementID(id).value);
+        var isValidString = /^(?!-)(?!_)(?!.*--)(?!.*__)[A-Za-z0-9-_]{3,15}[^-_"@'£$%^&*()§±]$/.test(getElementById(id).value);
 
-        if (usernameExists(getElementID(id).value)) { // Check if the username input matches a username in localStorage
+        if (usernameExists(getElementById(id).value)) { // Check if the username input matches a username in localStorage
             isValidString = false;
         }
 
@@ -87,7 +87,7 @@ function validate(id, response) {
          * (1) Contain the following special characters: !@#$%
          */
 
-        var isValidString = /^[A-Z]{1}(?=(.*[0-9]){3})[A-Za-z0-9!@#$%]{7,15}$/.test(getElementID(id).value);
+        var isValidString = /^[A-Z]{1}(?=(.*[0-9]){3})[A-Za-z0-9!@#$%]{7,15}$/.test(getElementById(id).value);
 
         if (response) { // Return isValidString if response is true
             return isValidString;
@@ -106,9 +106,9 @@ function validate(id, response) {
          * (1) Be optionally followed by (2), 0-2 times
          */
 
-        var isValidString = /^[A-Za-z0-9!#$%&'*+-/=?^_`{|}~]+@[A-Za-z]+\.[A-Za-z]{2,64}(\.[A-Za-z]{2,64}){0,2}$/.test(getElementID(id).value);
+        var isValidString = /^[A-Za-z0-9!#$%&'*+-/=?^_`{|}~]+@[A-Za-z]+\.[A-Za-z]{2,64}(\.[A-Za-z]{2,64}){0,2}$/.test(getElementById(id).value);
 
-        if (emailExists(getElementID(id).value)) { // Check if the e-mail input matches an e-mail in localStorage
+        if (emailExists(getElementById(id).value)) { // Check if the e-mail input matches an e-mail in localStorage
             isValidString = false;
         }
 
@@ -128,7 +128,7 @@ function validate(id, response) {
          * (2) Be followed by 10 numeric characters
          */
 
-        var isValidString = /^\+44[\s]?[0-9]{10}|^[0]{1}[0-9]{10}$/.test(getElementID(id).value);
+        var isValidString = /^\+44[\s]?[0-9]{10}|^[0]{1}[0-9]{10}$/.test(getElementById(id).value);
 
         if (response) { // Return isValidString if response is true
             return isValidString;
@@ -142,7 +142,7 @@ function validate(id, response) {
      * isEmptyString: Returns true or false if an IDs value is equal to an empty string.
      */
     function isEmptyString(id) {
-        return getElementID(id).value == ""; // Compare the value of ID to an empty string
+        return getElementById(id).value == ""; // Compare the value of ID to an empty string
     }
 
     /**
@@ -151,11 +151,11 @@ function validate(id, response) {
      */
     function setAttributes(id, isEmptyString, placeHolderValue) {
         if (isEmptyString) {
-            getElementID(id).setAttribute('placeholder', placeHolderValue); // Set the placeholder attribute to ID and assign placeHolderValue to placeholder
-            getElementID(id).removeAttribute('style'); // Remove the style attribute, which removes the text field background colour
+            getElementById(id).setAttribute('placeholder', placeHolderValue); // Set the placeholder attribute to ID and assign placeHolderValue to placeholder
+            getElementById(id).removeAttribute('style'); // Remove the style attribute, which removes the text field background colour
         }
         else {
-            getElementID(id).removeAttribute('placeholder'); // Remove the placeholder attribute from ID if the input is not empty
+            getElementById(id).removeAttribute('placeholder'); // Remove the placeholder attribute from ID if the input is not empty
         }
     }
 
@@ -179,7 +179,7 @@ function validate(id, response) {
         var tooltipID = (id + "-tooltip");
 
         if (id == 'username') {
-            if (usernameExists(getElementID(id).value)) {
+            if (usernameExists(getElementById(id).value)) {
                 /**
                  * If the input in the username text field is found in localStorage:
                  * (1) Replace the question mark icon with an exclamation mark icon
@@ -191,7 +191,7 @@ function validate(id, response) {
                 addClass(0, iconID, 'fa-exclamation');
                 removeClass(0, tooltipID, 'hint--large');
                 addClass(0, tooltipID, 'hint--medium');
-                getElementID(tooltipID).setAttribute('aria-label', "This username is already in use.");
+                getElementById(tooltipID).setAttribute('aria-label', "This username is already in use.");
             }
             else {
                 /**
@@ -205,11 +205,11 @@ function validate(id, response) {
                 addClass(0, iconID, 'fa-question');
                 removeClass(0, tooltipID, 'hint--medium');
                 addClass(0, tooltipID, 'hint--large');
-                getElementID(tooltipID).setAttribute('aria-label', getAriaLabel(id));
+                getElementById(tooltipID).setAttribute('aria-label', getAriaLabel(id));
             }
         }
         else if (id == 'email') {
-            if (emailExists(getElementID(id).value)) {
+            if (emailExists(getElementById(id).value)) {
                 /**
                  * If the input in the e-mail text field is found in localStorage:
                  * (1) Replace the question mark icon with an exclamation mark icon
@@ -218,7 +218,7 @@ function validate(id, response) {
 
                 removeClass(0, iconID, 'fa-question');
                 addClass(0, iconID, 'fa-exclamation');
-                getElementID(tooltipID).setAttribute('aria-label', "This e-mail address is already in use.");
+                getElementById(tooltipID).setAttribute('aria-label', "This e-mail address is already in use.");
             }
             else {
                 /**
@@ -229,7 +229,7 @@ function validate(id, response) {
 
                 removeClass(0, iconID, 'fa-exclamation');
                 addClass(0, iconID, 'fa-question');
-                getElementID(tooltipID).setAttribute('aria-label', getAriaLabel(id));
+                getElementById(tooltipID).setAttribute('aria-label', getAriaLabel(id));
             }
         }
     }
@@ -270,7 +270,7 @@ function createAccount() {
         if (flag) {
             for (var i = 0; i < tempArray.length; i++) {
                 if (validate(tempArray[i], true)) {
-                    data[i] = getElementID(tempArray[i]).value;
+                    data[i] = getElementById(tempArray[i]).value;
                 }
             }
         }
@@ -395,8 +395,8 @@ function getNewKey() {
  * matches the username's account in localStorage.
  */
 function logIn() {
-    var username = getElementID('username').value; // Assigns the value in the username text field
-    var password = getElementID('password').value; // Assigns the value in the password text field
+    var username = getElementById('username').value; // Assigns the value in the username text field
+    var password = getElementById('password').value; // Assigns the value in the password text field
 
     var validUsername = usernameExists(username); // Checks if the username entered exists, returns true or false
 
@@ -448,7 +448,7 @@ function logIn() {
              * An invalid credentials notification will be displayed.
              */
             addClass(0, 'login-alert', 'invalid-credentials'); // Add the 'invalid-credentials' class to login-alert
-            getElementID('login-alert').innerHTML = "The username or password entered is incorrect."; // Set login-alert's text
+            getElementById('login-alert').innerHTML = "The username or password entered is incorrect."; // Set login-alert's text
         }
     }
     else {
@@ -456,7 +456,7 @@ function logIn() {
          * An invalid credentials notification will be displayed.
          */
         addClass(0, 'login-alert', 'invalid-credentials'); // Add the 'invalid-credentials' class to login-alert
-        getElementID('login-alert').innerHTML = "The username or password entered is incorrect."; // Set login-alert's text
+        getElementById('login-alert').innerHTML = "The username or password entered is incorrect."; // Set login-alert's text
     }
 }
 
@@ -1084,7 +1084,7 @@ function storeCardID(n) {
  */
 function setCardValue(n) {
     var id = 'back-' + n; // Concatenates 'back-' with a card ID number
-    getElementID(id).innerHTML = grid[n]; // The HTML content for id is replaced with its associated grid value
+    getElementById(id).innerHTML = grid[n]; // The HTML content for id is replaced with its associated grid value
 }
 
 /**
@@ -1096,7 +1096,7 @@ function cardsMatch() {
     var id2 = 'back-' + game.getCardIDs()[1]; // Concatenates 'back-' with the card ID number in game.cardIDs[1]
 
 
-    if (getElementID(id1).innerHTML == getElementID(id2).innerHTML) { // Compares the HTML content of id1 and id2 for equality
+    if (getElementById(id1).innerHTML == getElementById(id2).innerHTML) { // Compares the HTML content of id1 and id2 for equality
         return true;
     }
 
@@ -1130,8 +1130,8 @@ function clearSelections(action, id) {
             /**
              * The HTML content of both cards is set to empty.
              */
-            getElementID('front-' + id[i]).innerHTML = "";
-            getElementID('back-' + id[i]).innerHTML = "";
+            getElementById('front-' + id[i]).innerHTML = "";
+            getElementById('back-' + id[i]).innerHTML = "";
         }
     }
     else {
@@ -1141,18 +1141,21 @@ function clearSelections(action, id) {
         removeCardValues();
     }
     /**
-     * game.cardIDs and game.totalFlipped are reset.
+     * game.cardIDs and game.totalFlipped are reset after 125ms.
      */
-    game.setCardIDs([]);
-    game.setTotalFlipped(0);
+
+    setTimeout(function() {
+        game.setCardIDs([]);
+        game.setTotalFlipped(0);
+    }, 125);
 }
 
 /**
  * removeCardValues: Resets the HTML content of a card back to its default value.
  */
 function removeCardValues() {
-    getElementID('back-' + game.getCardIDs()[0]).innerHTML = "?";
-    getElementID('back-' + game.getCardIDs()[1]).innerHTML = "?";
+    getElementById('back-' + game.getCardIDs()[0]).innerHTML = "?";
+    getElementById('back-' + game.getCardIDs()[1]).innerHTML = "?";
 }
 
 /******************
@@ -1194,9 +1197,9 @@ function updateLevel() {
             removeClass(2);
             removeClass(0, 'startButton', 'start-button-active');
 
-            getElementID('level').innerHTML = "" + player.getLevel();
-            getElementID('score').innerHTML = "" + player.getScore();
-            getElementID('time').innerHTML = "2 : 30";
+            getElementById('level').innerHTML = "" + player.getLevel();
+            getElementById('score').innerHTML = "" + player.getScore();
+            getElementById('time').innerHTML = "2 : 30";
         }, 1000);
 
         setTimeout(function () {
@@ -1251,8 +1254,8 @@ function newLevel() {
         /**
          * The HTML content for 'time' and 'level' is set with a new time and the players current level.
          */
-        getElementID('time').innerHTML = getTime();
-        getElementID('level').innerHTML = player.getLevel();
+        getElementById('time').innerHTML = getTime();
+        getElementById('level').innerHTML = player.getLevel();
 
         game.setLevelCompleted(false); // game.levelCompleted is set to false
     }, 1000);
@@ -1273,8 +1276,8 @@ function newLevel() {
  */
 function resetCardValues() {
     for (var i = 0; i < 18; i++) {
-        getElementID('front-' + i).innerHTML = "?";
-        getElementID('back-' + i).innerHTML = "?";
+        getElementById('front-' + i).innerHTML = "?";
+        getElementById('back-' + i).innerHTML = "?";
     }
 }
 
@@ -1334,14 +1337,14 @@ function updateScore() {
      */
     if (getItem(2, 'loggedIn') !== null) {
         updateAccount();
-        getElementID('rank').innerHTML = "" + JSON.parse(getItem(1, getLoggedIn()))['rank'];
+        getElementById('rank').innerHTML = "" + JSON.parse(getItem(1, getLoggedIn()))['rank'];
     }
 
     /**
      * The HTML content for score and highscore is updated.
      */
-    getElementID('score').innerHTML = "" + player.getScore();
-    getElementID('highscore').innerHTML = "" + player.getHighScore();
+    getElementById('score').innerHTML = "" + player.getScore();
+    getElementById('highscore').innerHTML = "" + player.getHighScore();
 }
 
 /********************************
@@ -1386,7 +1389,7 @@ function startTimer() {
      * The HTML content of time is split into an array of strings. The Number() function is used
      * to convert the strings into a number, e.g. 2 : 30 is converted to 230.
      */
-    var currentTime = (getElementID('time').innerHTML).match(/[^\s:]/g);
+    var currentTime = (getElementById('time').innerHTML).match(/[^\s:]/g);
     currentTime = Number(currentTime[0] + currentTime[1] + currentTime[2]);
 
     /**
@@ -1408,14 +1411,14 @@ function startTimer() {
      */
     function updateTime(currentTime) {
         if (currentTime.toString().length == 1) {
-            getElementID('time').innerHTML = ("0 : 0" + currentTime);
+            getElementById('time').innerHTML = ("0 : 0" + currentTime);
         }
         else if (currentTime.toString().length == 2) {
-            getElementID('time').innerHTML = ("0 : " + currentTime);
+            getElementById('time').innerHTML = ("0 : " + currentTime);
         }
         else {
             var tempString = currentTime.toString().split("");
-            getElementID('time').innerHTML = ("" + tempString[0] + " : " + tempString[1] + tempString[2]);
+            getElementById('time').innerHTML = ("" + tempString[0] + " : " + tempString[1] + tempString[2]);
         }
     }
 
@@ -1446,9 +1449,9 @@ function startTimer() {
  */
 
 /**
- * getElementID: Returns element when given an ID.
+ * getElementByID: Returns element when given an ID.
  */
-function getElementID(id) {
+function getElementById(id) {
     return document.getElementById(id);
 }
 
@@ -1460,7 +1463,7 @@ function addClass(action, id, newClass) {
         /**
          * Action 1: Initiates the start button animation effect by adding classes 'animated' and 'pulse'.
          */
-        getElementID(id).classList.add('animated', 'pulse');
+        getElementById(id).classList.add('animated', 'pulse');
 
         /**
          * Removes the two classes after 700ms.
@@ -1474,12 +1477,12 @@ function addClass(action, id, newClass) {
          * Action 2: Adds an animation effect to two cards when they have been matched.
          */
         for (var i = 0; i < 2; i++) {
-            getElementID('card-' + id[i]).classList.add('animated');
-            getElementID('card-' + id[i]).classList.add('flipOutX');
-            getElementID('front-' + id[i]).classList.add('fa');
-            getElementID('front-' + id[i]).classList.add('fa-check');
-            getElementID('back-' + id[i]).classList.add('fa');
-            getElementID('back-' + id[i]).classList.add('fa-check');
+            getElementById('card-' + id[i]).classList.add('animated');
+            getElementById('card-' + id[i]).classList.add('flipOutX');
+            getElementById('front-' + id[i]).classList.add('fa');
+            getElementById('front-' + id[i]).classList.add('fa-check');
+            getElementById('back-' + id[i]).classList.add('fa');
+            getElementById('back-' + id[i]).classList.add('fa-check');
         }
     }
     else if (action == 3) {
@@ -1488,11 +1491,11 @@ function addClass(action, id, newClass) {
          * all cards that were matched back on to the screen.
          */
         for (var i = 0; i < 18; i++) {
-            getElementID('card-' + i).classList.add('flipInX');
+            getElementById('card-' + i).classList.add('flipInX');
         }
     }
     else
-        getElementID(id).classList.add(newClass);
+        getElementById(id).classList.add(newClass);
 }
 
 /**
@@ -1503,16 +1506,16 @@ function removeClass(action, id, newClass) {
         /**
          * Action 1: Removes the classes 'animated' and 'pulse' from the start button.
          */
-        getElementID(id).classList.remove('animated', 'pulse');
+        getElementById(id).classList.remove('animated', 'pulse');
     else if (action == 2) {
         /**
          * Action 2: Removes the classes below from all cards when the game is over.
          */
         for (var i = 0; i < 18; i++) {
-            getElementID('card-' + i).classList.remove('flipped');
-            getElementID('card-' + i).classList.remove('flipOutX');
-            getElementID('front-' + i).classList.remove('fa', 'fa-check');
-            getElementID('back-' + i).classList.remove('fa', 'fa-check');
+            getElementById('card-' + i).classList.remove('flipped');
+            getElementById('card-' + i).classList.remove('flipOutX');
+            getElementById('front-' + i).classList.remove('fa', 'fa-check');
+            getElementById('back-' + i).classList.remove('fa', 'fa-check');
         }
     }
     else if (action == 3) {
@@ -1521,10 +1524,10 @@ function removeClass(action, id, newClass) {
          * the game has been completely reset.
          */
         for (var i = 0; i < 18; i++) {
-            getElementID('card-' + i).classList.remove('animated');
-            getElementID('card-' + i).classList.remove('flipInX');
+            getElementById('card-' + i).classList.remove('animated');
+            getElementById('card-' + i).classList.remove('flipInX');
         }
     }
     else
-        getElementID(id).classList.remove(newClass);
+        getElementById(id).classList.remove(newClass);
 }
