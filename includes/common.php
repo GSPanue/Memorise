@@ -22,6 +22,7 @@ function outputHeader($title) {
     echo '<script src="js/scripts.js"></script>';
     echo '<script src="libraries/cryptojs/core.js"></script>';
     echo '<script src="libraries/cryptojs/md5.js"></script>';
+
     if ($title == "Home") {
         echo '<script>$(document).ready(function() {
     /**
@@ -115,7 +116,7 @@ function outputNavigationBar($currentPage) {
             echo 'class="active" ';
         }
 
-        echo 'href="' . $pageNames[$i] . '.php"' . '>' . $pageTitles[$pageNames[$i]] . '</a></li>';
+        echo 'href="' . $pageNames[$i] . '.php">' . $pageTitles[$pageNames[$i]] . '</a></li>';
     }
 
     echo '</ul>';
@@ -151,7 +152,7 @@ function outputNavigationBar($currentPage) {
                 echo 'class="active" ';
             }
 
-            echo 'href="' . $pageNames[$i] . '.php"' . '>' . $pageTitles[$pageNames[$i]] . '</a></li>';
+            echo 'href="' . $pageNames[$i] . '.php">' . $pageTitles[$pageNames[$i]] . '</a></li>';
         }
     }
 
