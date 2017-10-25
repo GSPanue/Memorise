@@ -1,33 +1,10 @@
 <html>
-<!-- Display Header -->
-<?php require 'includes/header.php';?>
-<script>
-    $(document).ready(function() {
-        /**
-         * If a user is logged in, the users highscore is assigned to the player object.
-         * The highscore, status and rank HTML content is then updated.
-         *
-         * Otherwise, the default text is set.
-         */
-        if (getItem(2, 'loggedIn') !== null) {
-            player.setHighScore(JSON.parse(getItem(1, getLoggedIn()))['highscore']);
-            $("#highscore").text(player.getHighScore());
-            $("#status").text("Hello, " + JSON.parse(getItem(1, getLoggedIn()))['username'] + "." + " Your game progress will be saved.");
-            $("#rank").text(JSON.parse(getItem(1, getLoggedIn()))['rank']);
-        }
-        else {
-            /**
-             * Default text for a user that is not logged in.
-             */
-            $("#status").text("You are not logged in. Log-in to compete against other players.");
-            $("#highscore").text("0");
-            $("#rank").text("n/a");
-        }
-    });
-</script>
-<body>
-<!-- Display Navigation Bar -->
-<?php require 'includes/navigation.php';?>
+<!-- Display Header & Navigation -->
+<?php
+include('./includes/common.php'); // Includes PHP Functions
+outputHeader("Home");
+outputNavigationBar("index");
+?>
 
 <!-- Body Container -->
 <div class="body-container-a">
@@ -208,7 +185,9 @@
 </div>
 
 <!-- Display Footer -->
-<?php require 'includes/footer.php';?>
+<?php
+outputFooter();
+?>
 
 </body>
 </html>

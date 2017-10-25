@@ -1,21 +1,10 @@
 <html>
-<!-- Display Header -->
-<?php require 'includes/header.php';?>
-<script>
-    $(document).ready(function() {
-        /**
-         * The username, password, email and phone tooltip text is set.
-         */
-        var spanID = ['username', 'password', 'email', 'phone'];
-
-        for (var i = 0; i < spanID.length; i++) {
-            getElementById(spanID[i] + "-tooltip").setAttribute('aria-label', getAriaLabel(spanID[i]));
-        }
-    });
-</script>
-<body>
-<!-- Display Navigation Bar -->
-<?php require 'includes/navigation.php';?>
+<!-- Display Header & Navigation -->
+<?php
+include('./includes/common.php');
+outputHeader("Create An Account");
+outputNavigationBar("register");
+?>
 
 <!-- Body Container -->
 <div class="body-container-b">
@@ -104,7 +93,9 @@
 </div>
 
 <!-- Display Footer -->
-<?php require 'includes/footer.php';?>
+<?php
+outputFooter();
+?>
 
 </body>
 </html>

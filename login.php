@@ -1,9 +1,10 @@
 <html>
-<!-- Display Header -->
-<?php require 'includes/header.php';?>
-<body>
-<!-- Display Navigation Bar -->
-<?php require 'includes/navigation.php';?>
+<!-- Display Header & Navigation -->
+<?php
+include('./includes/common.php'); // Includes PHP Functions
+outputHeader("Log In");
+outputNavigationBar("login");
+?>
 
 <!-- Body Container -->
 <div class="body-container-b">
@@ -44,7 +45,9 @@
 </div>
 
 <!-- Display Footer -->
-<?php require 'includes/footer.php';?>
+<?php
+outputFooter();
+?>
 
 </body>
 </html>
