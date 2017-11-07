@@ -364,7 +364,7 @@ function emailExists(email) {
 function getAriaLabel(id) {
     if (id == 'username') {
         return "Username must be between 4-16 characters long and cannot begin or end with a dash or underscore, " +
-            "or contain the following special characters: -_&quot;@'£$%^&*()§±. Use of double underscore " +
+            "or contain the following special characters: -_\"@'£$%^&*()§±. Use of double underscore " +
             "or dash (e.g. --) is prohibited.";
     }
     else if (id == 'password') {
@@ -1322,7 +1322,7 @@ function getTime() {
  * updateScore: Updates the player score in both the player object, and HTML content.
  */
 function updateScore() {
-    player.setScore(getScore()); // Assigns a new score to player.Score
+    player.setScore(getScore()); // Assigns a new score to player.score
 
     /**
      * If the players new score is greater than the players highscore,

@@ -105,7 +105,7 @@ function outputNavigationBar($currentPage) {
      * Outputs the left-hand side navigation buttons and applies the 'active' CSS class
      * to a button that corresponds with the current page.
      */
-    for ($i = 0; $i < count($pageTitles) - $n = 3; $i++) {
+    for ($i = 0; $i < count($pageTitles) - 3; $i++) {
         echo '<li><a ';
 
         if ($currentPage == $pageNames[$i]) {
@@ -140,7 +140,7 @@ function outputNavigationBar($currentPage) {
         /**
          * Outputs 'Log In' and 'Create An Account'.
          */
-        for ($i = count($pageTitles) - $n = 3; $i < count($pageTitles) - $k = 1; $i++) {
+        for ($i = count($pageTitles) - 3; $i < count($pageTitles) - 1; $i++) {
             echo '<li><a ';
 
             if ($currentPage == $pageNames[$i]) {
