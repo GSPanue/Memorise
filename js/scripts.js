@@ -128,10 +128,10 @@ function validate(id, response) {
          * (2) Be followed by 10 numeric characters
          */
 
-        var isValidString = /^\+44[\s]?[0-9]{10}|^[0]{1}[0-9]{10}$/.test(getElementById(id).value);
+        var isValidString = /^\+44[\s]?[0-9]{10}$|^[0]{1}[0-9]{10}$/.test(getElementById(id).value);
 
         if (response) { // Return isValidString if response is true
-            if (getElementById(id).value.length == 0) {
+            if (isEmptyString(id)) {
                 isValidString = true;
             }
 
