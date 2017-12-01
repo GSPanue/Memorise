@@ -9,7 +9,7 @@ outputNavigationBar("login");
 <!-- Body Container -->
 <div class="body-container-b">
     <!-- Login Container -->
-    <div class="login-container">
+    <form class="login-container" onsubmit="return logIn()" action="index.php">
         <!-- Website Title -->
         <div class="logo title">Memorise</div>
         <!-- Username Container -->
@@ -17,7 +17,7 @@ outputNavigationBar("login");
             <!-- Username Icon -->
             <div class="username-title"><i class="fa fa-user login-icons"></i></div>
             <!-- Username Field -->
-            <input id="username" class="username-field" placeholder="Username" onkeydown="submit()">
+            <input type="text" id="username" class="username-field" placeholder="Username">
         </div>
 
         <!-- Password Container -->
@@ -25,7 +25,7 @@ outputNavigationBar("login");
             <!-- Password Icon -->
             <div class="password-title"><i class="fa fa-key login-icons"></i></div>
             <!-- Password Field -->
-            <input id="password" class="password-field" type="password" placeholder="Password" onkeydown="submit()">
+            <input type="password" id="password" class="password-field" placeholder="Password">
         </div>
 
         <!-- Invalid Username/Password Alert -->
@@ -39,9 +39,9 @@ outputNavigationBar("login");
         <!-- Log-in Button Container -->
         <div class="button-container">
             <!-- Log-in button -->
-            <div class="login-button" onclick="logIn()"><i class="fa fa-sign-in login-icons"></i></div>
+            <button type="submit" class="login-button"><i class="fa fa-sign-in login-icons"></i></button>
         </div>
-    </div>
+    </form>
 </div>
 
 <!-- Display Footer -->

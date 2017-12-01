@@ -131,6 +131,10 @@ function validate(id, response) {
         var isValidString = /^\+44[\s]?[0-9]{10}|^[0]{1}[0-9]{10}$/.test(getElementById(id).value);
 
         if (response) { // Return isValidString if response is true
+            if (getElementById(id).value.length == 0) {
+                isValidString = true;
+            }
+
             return isValidString;
         }
 
@@ -256,7 +260,7 @@ function createAccount() {
          * by passing true for the response parameter. If isValidString is false for one ID, flag is set to false.
          * The purpose is to assert that the required fields are valid.
          */
-        for (var i = 0; i < 3; i++) {
+        for (var i = 0; i < tempArray.length; i++) {
             if (!validate(tempArray[i], true)) {
                 flag = false;
             }
@@ -269,7 +273,7 @@ function createAccount() {
          */
         if (flag) {
             for (var i = 0; i < tempArray.length; i++) {
-                if (validate(tempArray[i], true)) {
+                if (validate(tempArray[i], true) && getElementById(tempArray[i]).value.length > 0) {
                     data[i] = getElementById(tempArray[i]).value;
                 }
             }
@@ -314,7 +318,6 @@ function createAccount() {
         account.setPhone((data.length == 4) ? data[3] : null); // Sets the phone number to the account object
 
         storeAccount(account); // Store the account in localStorage
-        redirect(); // Redirect to the log-in page
 
         /**
          * storeAccount: Stores the account object in the form of a JSON string using a key returned by getNewKey()
@@ -324,14 +327,9 @@ function createAccount() {
             setItem(getNewKey(), JSON.stringify(accountObject)); // Convert object to JSON string and store in localStorage
             updateRanks(); // Update all account ranks
         }
-
-        /**
-         * redirect: Redirects to the log-in page.
-         */
-        function redirect() {
-            var loginURL = (window.location.href + "").replace("register.php", "login.php"); // Replace "register.php" with "login.php"
-            window.location.href = loginURL; // Redirect to the log-in page
-        }
+    }
+    else {
+        return false;
     }
 }
 
@@ -432,16 +430,7 @@ function logIn() {
                 data: {loggedIn: status}
             });
 
-            updateRanks(); // Updates all account ranks before redirecting
-            redirect(); // Redirects to the homepage
-
-            /**
-             * redirect: Redirects to the homepage.
-             */
-            function redirect() {
-                var homeURL = (window.location.href + "").replace("login.php", "index.php"); // Replaces "login.php" with "index.php"
-                window.location.href = homeURL; // Redirects to the homepage
-            }
+            updateRanks(); // Updates all account ranks
         }
         else {
             /**
@@ -449,6 +438,8 @@ function logIn() {
              */
             addClass(0, 'login-alert', 'invalid-credentials'); // Add the 'invalid-credentials' class to login-alert
             getElementById('login-alert').innerHTML = "The username or password entered is incorrect."; // Set login-alert's text
+
+            return false;
         }
     }
     else {
@@ -457,6 +448,8 @@ function logIn() {
          */
         addClass(0, 'login-alert', 'invalid-credentials'); // Add the 'invalid-credentials' class to login-alert
         getElementById('login-alert').innerHTML = "The username or password entered is incorrect."; // Set login-alert's text
+
+        return false;
     }
 }
 
@@ -489,7 +482,7 @@ function logOut() {
  */
 function getUsernameKey(username) {
     for (var i = 1; i <= localStorage.length; i++) {
-        if (username == JSON.parse(getItem(1, i))['username']) {
+        if (username.toLowerCase() == JSON.parse(getItem(1, i))['username'].toLowerCase()) {
             return i;
         }
     }
@@ -625,7 +618,13 @@ function getLoggedIn() {
      * Uses 'loggedIn' as the key for sessionStorage, which returns a value that is parsed.
      * The parsed value is passed into getUsernameKey's parameter which then returns the localStorage
      * key for the account currently logged in.
+     *
+     * However, if the value of 'loggedIn' is null, null is returned.
      */
+    if (getItem(2, 'loggedIn') === null) {
+        return null;
+    }
+
     return getUsernameKey(JSON.parse(getItem(2, 'loggedIn')));
 }
 
@@ -648,33 +647,6 @@ function updateAccount() {
 
     setItem(key, JSON.stringify(account)); // Convert the account variable to a JSON string and replace the account in localStorage
     updateRanks(); // Update all account ranks
-}
-
-/**
- * Submit: Submits or logs in a user when pressing the enter key within a text field.
- */
-function submit() {
-    var currentPage = $(location).attr('href'); // Assigns current page URL
-    var isEnter = (event.keyCode == 13) ? true : false // Assigns true if the key pressed is enter
-
-    if (currentPage.includes("register.php")) {
-        /**
-         * If the current page is register.php and enter is pressed within a
-         * text field, createAccount() is called.
-         */
-        if (isEnter) {
-            createAccount();
-        }
-    }
-    else if (currentPage.includes("login.php")) {
-        /**
-         * If the current page is login.php and enter is pressed within a
-         * text field, logIn() is called.
-         */
-        if (isEnter) {
-            logIn();
-        }
-    }
 }
 
 /*********

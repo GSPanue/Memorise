@@ -9,7 +9,7 @@ outputNavigationBar("register");
 <!-- Body Container -->
 <div class="body-container-b">
     <!-- Register Container -->
-    <div class="register-container">
+    <form class="register-container" onsubmit="return createAccount()" action="login.php">
         <!-- Registration Title -->
         <div class="logo title">Create An Account</div>
 
@@ -20,7 +20,7 @@ outputNavigationBar("register");
                 <!-- Username Icon -->
                 <div class="register-username-title"><i class="fa fa-user register-icons"></i></div>
                 <!-- Username Field -->
-                <input id="username" class="register-username-field" placeholder="* Username" oninput="validate(this.id)" onkeydown="submit()">
+                <input type="text" id="username" class="register-username-field" placeholder="* Username" oninput="validate(this.id)">
                 <!-- Tooltip Container -->
                 <div class="register-tooltip">
                     <!-- Username Tooltip: Aria-label is added via jQuery $(document).ready() -->
@@ -35,7 +35,7 @@ outputNavigationBar("register");
                 <!-- Email Icon -->
                 <div class="register-email-title"><i class="fa fa-at register-icons"></i></div>
                 <!-- Email Field -->
-                <input id="email" class="register-email-field" placeholder="* E-mail Address" oninput="validate(this.id)" onkeydown="submit()">
+                <input type="text" id="email" class="register-email-field" placeholder="* E-mail Address" oninput="validate(this.id)">
                 <!-- Tooltip Container -->
                 <div class="register-tooltip">
                     <!-- Email Tooltip: Aria-label is added via jQuery $(document).ready() -->
@@ -54,7 +54,7 @@ outputNavigationBar("register");
                 <!-- Password Icon -->
                 <div class="register-password-title"><i class="fa fa-key register-icons"></i></div>
                 <!-- Password Field -->
-                <input id="password" class="register-password-field" type="password" placeholder="* Password" oninput="validate(this.id)" onkeydown="submit()">
+                <input type="password" id="password" class="register-password-field" placeholder="* Password" oninput="validate(this.id)">
                 <!-- Tooltip Container -->
                 <div class="register-tooltip">
                     <!-- Password Tooltip: Aria-label is added via jQuery $(document).ready() -->
@@ -69,7 +69,7 @@ outputNavigationBar("register");
                 <!-- Phone Icon -->
                 <div class="register-phone-title"><i class="fa fa-mobile register-icons"></i></div>
                 <!-- Phone Field -->
-                <input id="phone" class="register-phone-field" placeholder="UK Phone Number" oninput="validate(this.id)" onkeydown="submit()">
+                <input type="text" id="phone" class="register-phone-field" placeholder="UK Phone Number" oninput="validate(this.id)">
                 <!-- Tooltip Container -->
                 <div class="register-tooltip">
                     <!-- Phone Tooltip: Aria-label is added via jQuery $(document).ready() -->
@@ -87,9 +87,9 @@ outputNavigationBar("register");
         <!-- Registration Button Container -->
         <div class="button-container">
             <!-- Register Button -->
-            <div class="register-button" onclick="createAccount()"><i class="fa fa-sign-in register-icons"></i></div>
+            <button type="submit" class="register-button"><i class="fa fa-sign-in register-icons"></i></button>
         </div>
-    </div>
+    </form>
 </div>
 
 <!-- Display Footer -->

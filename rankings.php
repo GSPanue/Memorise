@@ -7,7 +7,7 @@ outputNavigationBar("rankings");
 ?>
 
 <!-- Body Container -->
-<div class="body-container-a">
+<div class="body-container-c">
     <!-- Rankings Title -->
     <div class="rankings-title-container">
         <div class="rankings-title">Player Rankings</div>
